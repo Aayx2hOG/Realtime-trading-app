@@ -118,7 +118,7 @@ export const TOP_STORIES_WIDGET_CONFIG = {
     displayMode: 'regular',
     feedMode: 'market',
     colorTheme: 'dark',
-    isTransparent: true,
+    isTransparent: false,
     locale: 'en',
     market: 'stock',
     width: '100%',
