@@ -1,9 +1,20 @@
-import { Button } from "@/components/ui/button";
+import TradingViewWidgets from "@/components/ui/TradingViewWidgets";
+import { MARKET_OVERVIEW_WIDGET_CONFIG } from "@/lib/constants";
 
 export default function Home() {
   return <main>
-    <div className="flex min-h-screen text-gray-400 flex-col gap-4 md:gap-10 items-center sm:items-start">
-      <Button>Click me</Button>
+    <div className="flex min-h-screen home-wrapper">
+      <section className="grid w-full gap-8 home-section">
+        <div className="md:col-span-1 xl: col-span-1">
+          <TradingViewWidgets
+            title="Market Overview"
+            scriptUrl="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js"
+            config={MARKET_OVERVIEW_WIDGET_CONFIG}
+            className="custom-chart"
+            height={600}
+          />
+        </div>
+      </section>
     </div>
   </main>
 }
