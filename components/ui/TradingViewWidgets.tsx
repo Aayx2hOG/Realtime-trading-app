@@ -1,7 +1,6 @@
 "use client";
 
 import { useTradingViewWidget } from '@/hooks/useTradingViewWidget';
-import { cn } from '@/lib/utils';
 import React, { useRef, memo } from 'react';
 
 interface TradingViewWidgetProps {
@@ -16,11 +15,10 @@ const TradingViewWidget = ({ title, scriptUrl, config, height = 600, className }
     const containerRef = useTradingViewWidget(scriptUrl, config, height);
 
     return (
-        <div className='w-full'>
+        <div className={`tradingview-widget-container ${className ?? ""}`.trim()} ref={containerRef} style={{ height: "100%", width: "100%" }}>
             {title && <h3 className="text-gray-100 text-2xl font-semibold mb-5">{title}</h3>}
-            <div className={cn('tradingview-widget-container', className)} ref={containerRef} style={{ height: "100%", width: "100%" }}>
-                <div className="tradingview-widget-container__widget" style={{ height, width: "100%" }} />
-            </div>
+            <div className="tradingview-widget-container__widget" style={{ height: "calc(100% - 32px)", width: "100%" }}></div>
+            <div className="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/NASDAQ-AAPL/" rel="noopener nofollow" target="_blank"><span className="blue-text">AAPL stock chart</span></a><span className="trademark"> by TradingView</span></div>
         </div >
     );
 }
