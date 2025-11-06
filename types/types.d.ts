@@ -248,6 +248,11 @@ declare global {
         threshold: number;
         changePercent?: number;
     };
+
+    var mongooseCache: {
+        conn: typeof mongoose | null;
+        promise: Promise<typeof mongoose> | null;
+    }
 }
 
 declare module "react-country-region-selector" {
@@ -260,7 +265,6 @@ declare module "react-country-region-selector" {
 
 export { };
 
-// Minimal types for `country-list` used by CountryRegionPicker
 declare module "country-list" {
     export function getData(): { name: string; code: string }[];
     export function getCode(name: string): string | undefined;
