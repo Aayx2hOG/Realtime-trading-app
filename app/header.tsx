@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Navitems } from "./navItems";
 import { UserDropdown } from "./userDropdown";
 
-export function Header() {
+export function Header({ user }: { user: User }) {
     return (
         <header className="sticky top-0 header">
             <div className="container header-wrapper">
@@ -15,7 +15,7 @@ export function Header() {
                     <Navitems />
                 </nav>
 
-                <UserDropdown />
+                <UserDropdown user={user} />
             </div>
         </header>
     );

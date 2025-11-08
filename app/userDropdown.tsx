@@ -6,14 +6,15 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Navitems } from "./navItems";
+import { signOut } from "@/lib/actions/auth_actions";
 
-export function UserDropdown() {
+export function UserDropdown({ user }: { user: User }) {
 
     const router = useRouter();
     const handleSignOut = async () => {
+        await signOut();
         router.push('/sign-in');
     }
-    const user = { name: "aayush", contact: "aayush@gmail.com" };
 
     return (
         <DropdownMenu>
@@ -54,7 +55,7 @@ export function UserDropdown() {
                                 {user.name}
                             </span>
                             <span className="text-sm font-normal text-gray-500">
-                                {user.contact}
+                                {user.email}
                             </span>
                         </div>
                     </div>

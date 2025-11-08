@@ -5,11 +5,15 @@ import { InputField } from "@/components/forms/inputField";
 import { SelectField } from "@/components/forms/selectField";
 import { Button } from "@/components/ui/button";
 import CountryRegionPicker from "@/components/ui/CountryRegionPicker";
+import { signUpWithEmail } from "@/lib/actions/auth_actions";
 import { INVESTMENT_GOALS, PREFERRED_INDUSTRIES, RISK_TOLERANCE_OPTIONS } from "@/lib/constants";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 const Signup = () => {
+    const router = useRouter();
     const {
         register,
         handleSubmit,
@@ -31,9 +35,14 @@ const Signup = () => {
 
     const onSubmit = async (data: SignUpFormData) => {
         try {
-            console.log("Form Data Submitted: ", data);
+            const result = await signUpWithEmail(data);
+            if (result.success) {
+                router.push("/");
+            }
         } catch (e) {
-            console.error("Error submitting form: ", e);
+            toast.error("Sign up failed. Please try again.", {
+                description: e instanceof Error ? e.message : "An error occurred during sign up.",
+            });
         }
     }
 
@@ -70,6 +79,7 @@ const Signup = () => {
                     name="password"
                     label="Password"
                     placeholder="Enter your password"
+                    type="password"
                     register={register}
                     error={errors.password}
                     validation={{ required: "Password is required", minLength: { value: 6, message: "Password must be at least 6 characters long" } }}
